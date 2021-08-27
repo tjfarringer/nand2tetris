@@ -10,3 +10,53 @@
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
 // Put your code here.
+    // Initialize the values
+    // @0
+    // D=A
+    // @R2
+    // M=D
+
+    @R0
+    D=M
+    @times
+    M=D
+    
+    @R2
+    M=0
+
+(LOOP) 
+    // if i > R0 then stop
+    @times
+    D=M
+    @END
+    D;JEQ // JEQ == if D = 0 then jump to the end
+
+    // Decrease the counter by one
+    @1
+    D=D-A // D = times, and we are subtracting by 1
+    @times
+    M=D
+
+    // Increase the sum by R1
+    @R2 
+    D=M 
+    
+    @R1 
+    D=D+M
+
+    @R2 
+    M=D
+
+	@LOOP
+	0;JMP
+
+(END)  // infiniate loop to end the program
+    @END
+    0;JMP
+
+
+
+//  Initatlize product value to 0 
+//  Loop through R0 times
+//  Add value of R1 to sum
+//  Subtract 1 from R0
